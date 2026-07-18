@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📦 メルカリ出品おまかせライン — はじめてガイド</title>
+<style>
+  :root{
+    --ink:#3a3226; --paper:#faf6ef; --card:#ffffff;
+    --accent:#e05d44; --accent-soft:#fdeae6;
+    --green:#4a8c5c; --green-soft:#e8f3ec;
+    --blue:#4a6f8c; --blue-soft:#e8eff5;
+    --gold:#c9a227; --gold-soft:#faf3dc;
+    --line:#e5ddd0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+    background:var(--paper);color:var(--ink);line-height:1.9;font-size:16px;}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 20px 80px;}
+
+  header{text-align:center;padding:48px 16px 36px;}
+  .badge{display:inline-block;background:var(--accent-soft);color:var(--accent);
+    font-weight:700;font-size:13px;padding:6px 18px;border-radius:999px;letter-spacing:.08em;}
+  h1{font-size:clamp(24px,5.5vw,34px);font-weight:800;margin:18px 0 10px;line-height:1.5;}
+  .lead{font-size:clamp(15px,3.5vw,17px);color:#6b6152;}
+
+  h2{font-size:clamp(19px,4.5vw,24px);font-weight:800;margin:64px 0 8px;
+    padding-left:14px;border-left:6px solid var(--accent);line-height:1.5;}
+  .h2sub{color:#8a7f6d;font-size:14px;margin-bottom:20px;padding-left:20px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px 22px;margin:16px 0;box-shadow:0 2px 8px rgba(58,50,38,.05);}
+
+  /* before / after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+  @media(max-width:560px){.ba{grid-template-columns:1fr;}}
+  .ba .col{border-radius:16px;padding:20px 18px;}
+  .ba .before{background:#f0ece4;border:1px solid var(--line);}
+  .ba .after{background:var(--green-soft);border:1px solid #c9dfd0;}
+  .ba h3{font-size:15px;margin-bottom:12px;}
+  .ba .before h3{color:#8a7f6d;}
+  .ba .after h3{color:var(--green);}
+  .ba ul{list-style:none;}
+  .ba li{padding:6px 0 6px 28px;position:relative;font-size:14.5px;}
+  .ba .before li::before{content:"😮‍💨";position:absolute;left:0;}
+  .ba .after li::before{content:"✅";position:absolute;left:0;}
+
+  /* timeline */
+  .tl{position:relative;margin:24px 0 8px;padding-left:34px;}
+  .tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:3px;
+    background:var(--line);border-radius:3px;}
+  .step{position:relative;margin-bottom:26px;}
+  .step::before{content:"";position:absolute;left:-29px;top:6px;width:16px;height:16px;
+    border-radius:50%;background:var(--accent);border:3px solid var(--paper);}
+  .step.you::before{background:var(--gold);}
+  .step .who{display:inline-block;font-size:12px;font-weight:700;padding:2px 12px;
+    border-radius:999px;margin-bottom:6px;}
+  .step.ai .who{background:var(--blue-soft);color:var(--blue);}
+  .step.you .who{background:var(--gold-soft);color:#9a7b13;}
+  .step h3{font-size:16.5px;font-weight:700;margin-bottom:4px;}
+  .step p{font-size:14.5px;color:#6b6152;}
+
+  /* role table */
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+  @media(max-width:560px){.roles{grid-template-columns:1fr;}}
+  .roles .col{border-radius:16px;padding:22px 20px;}
+  .roles .ai-col{background:var(--blue-soft);border:1px solid #cfdde9;}
+  .roles .you-col{background:var(--gold-soft);border:1px solid #e8d9a8;}
+  .roles h3{font-size:15.5px;margin-bottom:12px;}
+  .roles .ai-col h3{color:var(--blue);}
+  .roles .you-col h3{color:#9a7b13;}
+  .roles ul{list-style:none;}
+  .roles li{padding:5px 0 5px 26px;position:relative;font-size:14.5px;}
+  .roles .ai-col li::before{content:"🤖";position:absolute;left:0;font-size:13px;}
+  .roles .you-col li::before{content:"👤";position:absolute;left:0;font-size:13px;}
+  .roles .note{font-size:13px;color:#8a7f6d;margin-top:12px;line-height:1.7;}
+
+  .phone{background:#2f4438;border-radius:20px;padding:18px 16px;margin:20px 0;}
+  .bubble{max-width:85%;padding:10px 16px;border-radius:16px;margin:8px 0;font-size:14px;line-height:1.7;}
+  .me{background:#8de08a;color:#1e3320;margin-left:auto;border-bottom-right-radius:4px;}
+  .bot{background:#fff;color:var(--ink);border-bottom-left-radius:4px;}
+  .phone .time{font-size:11px;color:#a8c2b0;text-align:center;margin:10px 0 2px;}
+
+  .qa .card{margin:12px 0;}
+  .qa .q{font-weight:700;font-size:15.5px;margin-bottom:6px;}
+  .qa .q::before{content:"Q. ";color:var(--accent);}
+  .qa .a{font-size:14.5px;color:#5d5445;}
+  .qa .a::before{content:"A. ";color:var(--green);font-weight:700;}
+
+  .cta{background:linear-gradient(135deg,#fdf3e7,#fdeae6);border:2px solid var(--accent);
+    border-radius:20px;padding:32px 24px;margin:56px 0 0;text-align:center;}
+  .cta h2{border:none;padding:0;margin:0 0 14px;font-size:21px;}
+  .cta .url{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:10px 18px;font-family:Menlo,monospace;font-size:13px;word-break:break-all;
+    color:var(--blue);margin:8px 0 18px;}
+  .cta .prompt{background:#fff;border-radius:12px;border:1px dashed var(--accent);
+    padding:16px 18px;text-align:left;font-size:14.5px;margin-top:8px;}
+  .cta .prompt b{color:var(--accent);}
+
+  .warn{background:#fff8f0;border:1px solid #ecd9bb;border-radius:12px;
+    padding:14px 18px;font-size:13.5px;color:#7d6a4a;margin:14px 0;}
+  footer{text-align:center;color:#a89c88;font-size:12.5px;margin-top:64px;line-height:2;}
+  .big{font-size:1.15em;font-weight:700;color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="badge">はじめてガイド</span>
+  <h1>📦 メルカリ出品おまかせライン</h1>
+  <p class="lead">スマホで写真を1枚送るだけ。<br>めんどうな出品準備は、ぜんぶAIにおまかせ。</p>
+</header>
+
+<h2>これは、なに？</h2>
+<p class="h2sub">30秒でわかる全体像</p>
+<div class="card">
+  <p>おうちの売りたいもの（読み終わった本、使わなくなった家電など）を<b>スマホで撮って、LINEに送るだけ</b>。</p>
+  <p style="margin-top:10px;">すると、あなたのパソコンの中のAI（Claude Code）が——</p>
+  <p style="margin-top:10px;">🖼️ 写真をきれいに加工して<br>🔍 いくらで売れるか相場を調べて<br>✍️ タイトルと説明文を書いて<br>📝 メルカリの<b>下書き</b>まで作ってくれます。</p>
+  <p style="margin-top:14px;">あなたは最後に、スマホで下書きを見て<span class="big">「出品する」を押すだけ</span>。<br><b>AIが勝手に売ることは、ぜったいにありません。</b></p>
+</div>
+
+<h2>使うと、どう変わる？</h2>
+<p class="h2sub">「出品めんどくさい…」が消える未来</p>
+<div class="ba">
+  <div class="col before">
+    <h3>いままで</h3>
+    <ul>
+      <li>写真を何枚も撮り直す</li>
+      <li>タイトル何て書けばいいの…</li>
+      <li>相場がわからず値付けに悩む</li>
+      <li>説明文で30分固まる</li>
+      <li>結局「また今度でいいや」</li>
+    </ul>
+  </div>
+  <div class="col after">
+    <h3>これから</h3>
+    <ul>
+      <li>写真1枚パシャ→LINEにポン</li>
+      <li>家事や仕事をしてる間に完成</li>
+      <li>相場調査ずみの値段つき</li>
+      <li>説明文も書いてある</li>
+      <li>押すのは出品ボタンだけ</li>
+    </ul>
+  </div>
+</div>
+<div class="card">
+  <p>💡 <b>いちばん変わるのは「気持ち」です。</b>「売ろうかな」と思った瞬間に写真を1枚送れば、もう作業は始まっています。<b>「あとでやろう」の山が、おこづかいに変わっていきます。</b></p>
+</div>
+
+<h2>ふだんの使いかた</h2>
+<p class="h2sub">セットアップが終わったあとの毎日は、こう</p>
+<div class="phone">
+  <p class="time">— ある日の午後 —</p>
+  <div class="bubble me">📷（読み終わった本の写真）</div>
+  <div class="bubble bot">📦 受け取りました！準備ができたらお知らせします</div>
+  <p class="time">— 20〜30分後 —</p>
+  <div class="bubble bot">📦 出品準備が完了しました！<br><br>「〇〇〇〇（本のタイトル）」<br>価格：1,200円（相場調査ずみ・送料込み）<br><br>メルカリの下書き一覧を開いて、確認→出品ボタンだけお願いします</div>
+</div>
+<div class="card">
+  <p>あなたがしたことは、<b>写真を1枚送っただけ</b>。あとはメルカリアプリの「下書き一覧」を開いて、内容を確認して出品ボタンを押せば売り出し完了です。値段や文章を直したければ、出品前に自由に変えられます。</p>
+</div>
+
+<h2>準備はむずかしくないの？</h2>
+<p class="h2sub">最初の1回だけセットアップがあります（60〜90分）</p>
+<div class="card">
+  <p>じつはこの仕組み、最初に一度だけ「工事」が必要です。……と聞くと身がまえますよね。<b>だいじょうぶです。工事もAIがやります。</b></p>
+  <p style="margin-top:10px;">受け取ったフォルダをAI（Claude Code）に渡すと、AIが<b>作戦書を読んで自分でセットアップを進めます</b>。むずかしい画面の操作も、AIが代わりにやってくれます。</p>
+</div>
+
+<div class="roles">
+  <div class="col ai-col">
+    <h3>🤖 AIがやること（ほぼ全部）</h3>
+    <ul>
+      <li>必要な道具のインストール</li>
+      <li>無料サーバーの設定・構築</li>
+      <li>LINEの窓口づくり（画面操作を代行）</li>
+      <li>むずかしい設定ぜんぶ</li>
+      <li>動作テストと確認</li>
+    </ul>
+  </div>
+  <div class="col you-col">
+    <h3>👤 あなたがやること（4つだけ）</h3>
+    <ul>
+      <li>各サービスへの<b>ログイン</b></li>
+      <li>スマホに届く<b>認証コード</b>を伝える</li>
+      <li>QRコードを読んで<b>友だち追加</b></li>
+      <li>「許可」ボタンを押す</li>
+    </ul>
+    <p class="note">ぜんぶ、ふだんスマホでやっていることばかり。プログラミングの知識はいっさい要りません。</p>
+  </div>
+</div>
+
+<h2>セットアップの流れ</h2>
+<p class="h2sub">当日はこんな順番で進みます</p>
+<div class="tl">
+  <div class="step you">
+    <span class="who">👤 あなた</span>
+    <h3>フォルダをダウンロードして、AIにひとこと</h3>
+    <p>GitHubのページから「Code → Download ZIP」。Claude Codeを開いて「セットアップ指示書を読んで進めて」と伝えるだけ。</p>
+  </div>
+  <div class="step ai">
+    <span class="who">🤖 AI</span>
+    <h3>道具をそろえる（約10分）</h3>
+    <p>写真加工の道具などを、AIが自分でインストール。あなたは見ているだけ。</p>
+  </div>
+  <div class="step ai">
+    <span class="who">🤖 AI</span>
+    <h3>無料の受付サーバーを建てる（約15分）</h3>
+    <p>写真の受け取り役をネット上に構築。無料アカウントの作成だけお願いされます（メール登録するだけ）。</p>
+  </div>
+  <div class="step you">
+    <span class="who">👤 あなた＋🤖 AI</span>
+    <h3>LINEの窓口をつくる（約20分）</h3>
+    <p>いちばんむずかしい所ですが、画面の操作はAIが代行。あなたはログインと、スマホに届く認証コードを伝えるだけ。</p>
+  </div>
+  <div class="step you">
+    <span class="who">👤 あなた</span>
+    <h3>QRコードで友だち追加</h3>
+    <p>できあがった「あなた専用の受付LINE」を、スマホでピッと友だち追加。</p>
+  </div>
+  <div class="step ai">
+    <span class="who">🤖 AI</span>
+    <h3>最終テスト（約10分）</h3>
+    <p>売ってもいい物を1つ撮って送ってみて、下書きができるまでを一緒に確認。🎉 完成！</p>
+  </div>
+</div>
+
+<h2>よくある心配ごと</h2>
+<p class="h2sub">はじめる前に、気になるところ</p>
+<div class="qa">
+  <div class="card"><p class="q">勝手に出品されない？</p><p class="a">されません。AIが作れるのは「下書き」まで。売り出すかどうか・いくらで売るかは、いつも最後にあなたが決めます。</p></div>
+  <div class="card"><p class="q">お金はかかる？</p><p class="a">この仕組み自体は無料の道具だけで動きます。必要なのはClaude Codeの利用料（すでにお使いのもの）だけ。受付サーバーもLINE窓口も無料枠でおさまります。</p></div>
+  <div class="card"><p class="q">写真はどこかに公開されない？</p><p class="a">写真はあなた専用の受付サーバーだけに保存され、一定期間で自動削除されます。しかも受付は「あなた本人のLINE」だけ。他の人が送っても受け付けません。</p></div>
+  <div class="card"><p class="q">パソコンが苦手でもできる？</p><p class="a">セットアップの操作はAIが代行します。あなたがやるのはログイン・認証コード・QR・許可ボタンの4つだけ。途中で分からなくなったら、AIに「分からない」と言えば言葉をかえて説明してくれます。</p></div>
+  <div class="card"><p class="q">写真を送っても反応しないときは？</p><p class="a">この仕組みは「パソコンでClaude Codeを開いている間」に動きます。閉じている間に送った写真もちゃんと貯まっていて、次に開いたときにまとめて処理されます。</p></div>
+</div>
+
+<div class="warn">⚠️ <b>ご利用の前に</b>：Mac専用です（Windowsでは動きません）。メルカリ等の仕様変更で使えなくなる可能性があります。フリマアプリの規約の範囲でのご利用を（利用は自己責任でお願いします）。</div>
+
+<div class="cta">
+  <h2>🚀 はじめかた</h2>
+  <p style="font-size:14.5px;margin-bottom:6px;">↓ このページ（GitHub）からフォルダをダウンロード ↓</p>
+  <a class="url" href="https://github.com/Tagaru05/mercari-line-shuppin">github.com/Tagaru05/mercari-line-shuppin</a>
+  <p style="font-size:14.5px;">緑の「Code」ボタン →「Download ZIP」で保存して、<br>そのフォルダで Claude Code を開いて、こう伝えてください：</p>
+  <div class="prompt"><b>「このフォルダの『セットアップ指示書.md』を読んで、その通りにセットアップを進めて。私は初心者なので、私がやる操作は1つずつ案内してください」</b></div>
+</div>
+
+<footer>
+  📦 メルカリ出品おまかせライン ／ このガイドは限定共有です<br>
+  困ったときは、このツールを渡してくれた人に気軽にご相談ください
+</footer>
+
+</div>
+</body>
+</html>
