@@ -1,0 +1,9 @@
+# このファイルを wrangler.toml にコピーして、（　）を自分の値に置き換える
+# name はユニークに（例 line-mercari-hanako）。id は wrangler kv namespace create の出力
+name = "line-mercari-（あなたの名前ローマ字）"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+
+[[kv_namespaces]]
+binding = "UKETSUKE"
+id = "（wrangler kv namespace create UKETSUKE の出力id）"

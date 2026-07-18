@@ -1,0 +1,17 @@
+# 秘密情報（絶対に上げない）
+.env
+.env.*
+.dev.vars
+.list_key
+config.md
+wrangler.toml
+# 実データ・作業ファイル
+received/
+work/
+*.jpg
+*.jpeg
+*.png
+venv/
+node_modules/
+.DS_Store
+.wrangler/
